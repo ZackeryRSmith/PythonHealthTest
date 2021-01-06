@@ -1,5 +1,4 @@
 #Questionaire for wellness
-import pyautogui
 import time
 
 rusername = "****"
