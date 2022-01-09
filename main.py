@@ -1,84 +1,55 @@
-#Questionaire for wellness
+# Questionaire for wellness
+# Quicky fixed and simplified by https://github.com/ZackeryRSmith
+
+# Developer note: Hey TristanCanDev/Blu! It seems you may be new to python (Granted this was last updated 12 months ago), which is just fine! I tried commenting this code with the best explanations I can. Please, just please don't use so many if statements like you did. 
+
+# Even though python allows it is not pythonic to do if statements like so `if(x == "blaa blaa blaa")` I know coming from a language like c++ and c# it may be weird!
+
 import time
 
-rusername = "****"
-rpassword = "****"
-
-HealthPoint = 0
-TotalPossible = 24
-
-Question1 = "Do you utilize the oral health care system and abide their guidlines?"
-Question2 = "Do you eat items with high sugar counts that could reduce the chance of getting proper nutrients but could give you excessive amounts of calories?"
-Question3 = "Do you inject, take, or consume drugs (This excludes Marijuana as it is healthy to take in most cases) of any form?"
-Question4 = "Do you consume alcoholic beverages regularly?"
-Question5 = "Do you live in a community where you are often subjected or exposed to unhealthy poluted air?"
-Question6 = "Do you have any eating disorder such as anorexia or bulimia?"
-Question7 = "Do you live in a community or household that has limited access to food which causess starvation among yourself or others?"
-Question8 = "Have you recieved your general vaccinations?"
-Question9 = "Do you get your influenza vaccination yearly?"
-Question10 = "Do you have any STIs such as HIV?"
-Question11= "Do you currently have any health conditions?"
-Question12 = "Do you suffer mental illness or suffer from suicidal thoughts?"
+# Multi-line variable declaration
+health_points, total_possible = 0, 24
 
 
 print("Welcome to the BluSoftware Wellness Test created within python! Please be sure to answer all questions honestly so we can properly gauge your general wellness")
 time.sleep(1)
+
 print("Remember, most of these questions have been created out of the Leading Health Indicators that you can find at health.gov/healthypeople")
 time.sleep(2)
-##userinp = input("Are you an administrator? y/n ")
-##if (userinp == "y" or userinp == "Y"):
-##    username = input("Username ")
-##    password = input("Password ")
-##    if (username != rusername):
-##        print("Username Incorrect")
-##    if(username == rusername):
-##        if(password != rpassword):
-##            print("Incorrect Password")
-array = [Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9, Question10, Question11, Question12]
-for x in array:
-    userin =input(x + " y/n ")
-    if(x == Question1):
-        if(userin == "Y" or userin == "y"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question2):
-        if(userin == "N" or userin == "n"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question3):
-        if(userin == "N" or userin == "n"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question4):
-        if(userin == "N" or userin == "n"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question5):
-        if(userin == "N" or userin == "n"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question6):
-        if(userin == "N" or userin == "n"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question7):
-        if(userin == "N" or userin == "n"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question8):
-        if(userin == "Y" or userin == "y"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question9):
-        if(userin == "Y" or userin == "y"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question10):
-        if(userin == "N" or userin == "n"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question11):
-        if(userin == "N" or userin == "n"):
-            HealthPoint = HealthPoint + 2
-    if(x == Question12):
-        if(userin == "N" or userin == "n"):
-            HealthPoint = HealthPoint + 2
 
-if(HealthPoint <= 6):
+# Allows declaration in one line, but looks a bit chunky
+questions = ["Do you utilize the oral health care system and abide their guide lines?", "Do you eat items with high sugar counts that could reduce the chance of getting proper nutrients but could give you excessive amounts of calories?", "Do you inject, take, or consume drugs (This excludes Marijuana as it is healthy to take in most cases) of any form?", "Do you consume alcoholic beverages regularly?", "Do you live in a community where you are often subjected or exposed to unhealthy polluted air?", "Do you have any eating disorder such as anorexia or bulimia?", "Do you live in a community or household that has limited access to food which causess starvation among yourself or others?", "Have you received your general vaccinations?", "Do you get your influenza vaccination yearly?", "Do you have any STIs such as HIV?", "Do you currently have any health conditions?", "Do you suffer mental illness or suffer from suicidal thoughts?"]
+
+# There is a better way to do this.. But, this will simplify all the if statements in the for loop
+best_answer = ["y", "n", "n", "n", "n", "n", "n", "y", "y", "n", "n", "n"]
+
+# For loop, gets the index of the current question along with the question.
+for index, question in enumerate(questions):
+    while True:  # While loop, allows us to repeat a question if [Y or N] format was not met
+        userin = input(question + " [y/n] ")
+        
+        # Let me explain this if.
+        # First we lowercase the input an example would be taking "HELLO" into "hello"
+        # We then check if the input is NOT in a list. This is the same thing as writing
+        # `if userin.lower() != "y" or userin.lower != "n"`
+        # As you can see it's cleaner. If the input is not y or n we repeat the while loop (essentially repeating the question)
+        if userin.lower() not in ["y", "n"]:  # lower() lowercases any string I.e. "HELLO" -> "hello"
+            print("Not 'y' or 'n'")
+            continue
+        # Check if the input is the best answer possible
+        elif userin.lower() == best_answer[index]:
+            health_points += 2
+            break
+        # If input is NOT the best answer possible
+        else:
+            break
+
+# Kept your old system, just removed the un-needed braces
+if health_points <= 6:
     print("With the answers you have provided, we have decided to declare you unhealthy")
-elif(HealthPoint <= 12):
+elif health_points <= 12:
     print("With the answers you have provided, we have decided to declare you moderately unhealthy")
-elif(HealthPoint <= 18):
+elif health_points <= 18:
     print("With the answers you have provided, we have decided to declare you moderately healthy")
-elif(HealthPoint <= 24):
+elif health_points <= 24:
     print("With the answers you have provided, we have decided to declare you healthy")
