@@ -3,8 +3,6 @@
 
 # Developer note: Hey TristanCanDev/Blu! It seems you may be new to python (Granted this was last updated 12 months ago), which is just fine! I tried commenting this code with the best explanations I can. Please, just please don't use so many if statements like you did. 
 
-# Even though python allows it is not pythonic to do if statements like so `if(x == "blaa blaa blaa")` I know coming from a language like c++ and c# it may be weird!
-
 import time
 
 # Multi-line variable declaration
